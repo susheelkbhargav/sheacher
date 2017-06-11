@@ -1,7 +1,7 @@
 var twilio = require('twilio');
 var accountSid = 'AC97083564b3cb43a3279dcc48b0a976ed'; 
 var authToken = '16aec6db1fed7d66ba29b70d238d7535';   
-
+var ports = process.env.PORT;
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
 
@@ -27,8 +27,8 @@ app.post('/sms', function(req, res) {
   res.end(twiml.toString());
 });
 
-http.createServer(app).listen(1337, function () {
-  console.log("Express server listening on port 1337");
+http.createServer(app).listen(ports, function () {
+  console.log("Express server listening port ", ports);
 });
 
 

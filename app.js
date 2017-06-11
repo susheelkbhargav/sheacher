@@ -13,18 +13,24 @@ client.messages.create({
 .then((message) => console.log(message.sid));
 
 
+var http = require('http');
+var express = require('express');
 
-app.post("/message", function (request, response) {
-  console.log(request.body.Body);
-  console.log(request.body.From);  
-//  response.send("<Response><Message>" + request.body.Body + "</Message></Response>");
+
+var app = express();
+
+app.post('/sms', function(req, res) {
+  var twilio = require('twilio');
+  var twiml = new twilio.TwimlResponse();
+  twiml.message('The Robots are coming! Head for the hills!');
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
 });
 
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+http.createServer(app).listen(1337, function () {
+  console.log("Express server listening on port 1337");
 });
 
-var listener = app.listen(3000, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
+
+
 

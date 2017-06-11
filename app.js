@@ -20,11 +20,11 @@ var express = require('express');
 var app = express();
 
 app.post('/sms', function(req, res) {
-  var twilio = require('twilio');
   var twiml = new twilio.TwimlResponse();
-  twiml.message('The Robots are coming! Head for the hills!');
+  twiml.message('Thank you for subscribing');
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
+  console.log(req);
 });
 
 http.createServer(app).listen(ports, function () {
